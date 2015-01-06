@@ -41,7 +41,14 @@ In your application, create Metric objects of the appropriate GameAnalytics type
     m = GameAnalytics::Metric::Business.new(:user_id => '-100', :session_id => '-100',
       :build => 'development', :message => 'test')
     GameAnalytics.client.enqueue m
-    
+
+GameAnalytics uses the submitting ip to determine the country the user resides in. If you are submitting events
+in the name of the user (e.g. client) from another machine (e.g. server), you can pass the original ip using `new_with_ip`:
+
+    m = GameAnalytics::Metric::Business.new_with_ip('123.123.123.123', :user_id => '-100', :session_id => '-100',
+          :build => 'development', :message => 'test')
+        GameAnalytics.client.enqueue m
+
 You can also send arrays of objects in a single service request:
 
     GameAnalytics.client.enqueue [m1, m2]
