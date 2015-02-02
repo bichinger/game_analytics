@@ -14,13 +14,16 @@ class Worker
   end
   
   def process(unit)
-    klass = unit.is_a?(Array) ? unit.first.class : unit.class
-    category = klass.name.demodulize.downcase
+    metric = unit.is_a?(Array) ? unit.first : unit
+    klass = metric.class
+
     json_data = unit.to_json
-    hd = Digest::MD5.hexdigest(json_data + options[:secret_key])
+    header = {'Authorization' => Digest::MD5.hexdigest(json_data + options[:secret_key])}
+    header['X-Forwarded-For'] = metric.origin_ip if metric.origin_ip
+    category = klass.name.demodulize.downcase
     url = "#{@url_base}/#{category}"
-    logger.info "GameAnalytics <: #{url} #{json_data} #{hd}"
-    resp = @http.post(url, :body => json_data, :header => { 'Authorization' => hd })
+    logger.info "GameAnalytics <: #{url} #{json_data} #{header.inspect}"
+    resp = @http.post(url, :body => json_data, :header => header)
     logger.info "GameAnalytics >: #{resp.content} (#{resp.status})"
   end
   

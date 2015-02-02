@@ -2,8 +2,15 @@ module GameAnalytics
 class Metric
   
   include Common
-  
-  
+
+  attr_accessor :origin_ip
+
+  def self.new_with_ip(ip, data={})
+    metric = self.new(data)
+    metric.origin_ip = ip
+    metric
+  end
+
   def initialize(data={})
     @data = data
     needs = required_keys - data.keys
@@ -35,7 +42,6 @@ class Metric
   
   class Quality < Metric
   end
-
 
 end
 end
