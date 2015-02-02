@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/bichinger/game_analytics'
   spec.license       = 'MIT'
   spec.authors       = ['wlipa','gr8bit']
-  spec.email         = ['niklas@bichinger.de]
+  spec.email         = ['niklas@bichinger.de']
 
   spec.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   spec.files         = `git ls-files`.split("\n")
