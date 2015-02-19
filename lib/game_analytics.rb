@@ -1,3 +1,4 @@
+require 'logger'
 require 'game_analytics/common'
 require 'game_analytics/client'
 require 'game_analytics/metric'
@@ -14,10 +15,10 @@ module GameAnalytics
 
   def self.config(opts)
     @options = opts
-    @logger = opts[:logger] || Rails.logger
+    @logger = opts[:logger] ? opts[:logger] : const_defined?('Rails') ? Rails.logger : Logger.new(STDOUT)
     @disabled = opts[:disabled]
   end
-  
+
   def self.client
     @client ||= Client.new
   end
