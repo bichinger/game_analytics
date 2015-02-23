@@ -22,25 +22,31 @@ module GameAnalytics
     end
 
     def required_keys
-      [:user_id, :session_id, :build, :event_id]
+      self.class.const_get("REQUIRED_KEYS")
     end
 
 
     class Design < Metric
+
+      REQUIRED_KEYS = [:user_id, :session_id, :build, :event_id]
+
     end
 
     class User < Metric
+
+      REQUIRED_KEYS = [:user_id, :session_id, :build, :event_id]
+
     end
 
     class Business < Metric
 
-      def required_keys
-        super + [:currency, :amount]
-      end
+      REQUIRED_KEYS = [:user_id, :session_id, :build, :event_id, :currency, :amount]
 
     end
 
     class Quality < Metric
+
+      REQUIRED_KEYS = [:user_id, :session_id, :build, :event_id]
 
       def initialize(data={})
         super
@@ -51,9 +57,7 @@ module GameAnalytics
 
     class Error < Metric
 
-      def required_keys
-        super - [:event_id]
-      end
+      REQUIRED_KEYS = [:user_id, :session_id, :build]
 
     end
 
