@@ -15,7 +15,7 @@ available.
 
 Add this line to your application's Gemfile:
 
-```
+```ruby
 gem 'game_analytics'
 ```
 
@@ -32,7 +32,7 @@ Or install it yourself as:
 Configure the gem with your GameAnalytics keys by placing code like the following in
 your initializer:
 
-```
+```ruby
 GameAnalytics.config(
   :game_key => '123451234512345123451234512345',
   :secret_key => '123451234512345123451234512345'
@@ -42,7 +42,7 @@ GameAnalytics.config(
 In your application, create Metric objects of the appropriate GameAnalytics types
 (Design, Business, Quality, or User), and send them to the service:
 
-```
+```ruby
 m = GameAnalytics::Metric::Business.new(:user_id => '-100', :session_id => '-100',
   :build => 'development', :message => 'test')
 GameAnalytics.client.enqueue m
@@ -51,14 +51,14 @@ GameAnalytics.client.enqueue m
 GameAnalytics uses the submitting ip to determine the country the user resides in. If you are submitting events
 in the name of the user (e.g. client) from another machine (e.g. server), you can pass the original ip using `new_with_ip`:
 
-```
+```ruby
 m = GameAnalytics::Metric::Business.new_with_ip('123.123.123.123', :user_id => '-100', :session_id => '-100', :build => 'development', :message => 'test')
 GameAnalytics.client.enqueue m
 ```
 
 You can also send arrays of objects in a single service request:
 
-```
+```ruby
 GameAnalytics.client.enqueue [m1, m2]
 ```
 
