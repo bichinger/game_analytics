@@ -21,7 +21,7 @@ gem 'game_analytics'
 
 And then execute:
 
-  $ bundle
+    $ bundle
 
 Or install it yourself as:
 
