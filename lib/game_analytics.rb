@@ -12,11 +12,9 @@ module GameAnalytics
     attr_accessor :options, :logger, :disabled
   end
 
-  self.logger = const_defined?('Rails') ? Rails.logger : Logger.new(STDOUT)
-
   def self.config(opts)
     @options = opts
-    @logger = opts[:logger] if opts[:logger]
+    @logger = opts[:logger] || (const_defined?('Rails') ? Rails.logger : Logger.new(STDOUT))
     @disabled = opts[:disabled]
   end
 
