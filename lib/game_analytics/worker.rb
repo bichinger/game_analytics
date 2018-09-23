@@ -20,6 +20,7 @@ module GameAnalytics
 
       json_data = unit.to_json
       category = klass.name.demodulize.downcase
+      logger.info "JSON: #{json_data}"
       json_data['category'] = category
 
       header = {'Authorization' => Base64.strict_encode64(OpenSSL::HMAC.digest('sha256', options[:secret_key], json_data)) }
