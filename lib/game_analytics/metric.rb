@@ -12,7 +12,7 @@ module GameAnalytics
     end
 
     def initialize(data={})
-      data = data.merge(shared_required_default_keys)
+      data = shared_required_default_keys.merge(data)
 
       @data = data
       needs = required_keys - data.keys
@@ -33,7 +33,7 @@ module GameAnalytics
         devise: 'unknown',
         v: 2,
         sdk_version: 'rest api v2',
-        os_version: 'unknown',
+        os_version: 'linux 0.0',
         manufacturer: 'unknown',
         platform: 'unknown',
         client_ts: Time.zone.now.to_i
