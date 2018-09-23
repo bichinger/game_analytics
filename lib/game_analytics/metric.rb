@@ -12,7 +12,7 @@ module GameAnalytics
     end
 
     def initialize(data={})
-      data = data.merge({ category: self.class.name.demodulize.downcase })
+      data = data.merge(shared_required_keys)
 
       @data = data
       needs = required_keys - data.keys
@@ -25,6 +25,19 @@ module GameAnalytics
 
     def required_keys
       self.class.const_get("REQUIRED_KEYS")
+    end
+
+    def shared_required_default_keys
+      {
+        category: self.class.name.demodulize.downcase,
+        devise: 'unknown',
+        v: 2,
+        sdk_version: 'rest api v2',
+        os_version: 'unknown',
+        manufacturer: 'unknown',
+        platform: 'unknown',
+        client_ts: Time.zone.now.to_i
+      }
     end
 
 
