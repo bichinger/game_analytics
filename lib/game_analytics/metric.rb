@@ -12,7 +12,7 @@ module GameAnalytics
     end
 
     def initialize(data={})
-      data = data.merge(shared_required_keys)
+      data = data.merge(shared_required_default_keys)
 
       @data = data
       needs = required_keys - data.keys
