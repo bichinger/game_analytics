@@ -32,6 +32,7 @@ module GameAnalytics
     end
 
     def start_worker
+      raise
       @worker_thread = Thread.new do
         begin
           Worker.new(@queue).run
