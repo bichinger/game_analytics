@@ -61,5 +61,11 @@ module GameAnalytics
 
     end
 
+    class Progression < Metric
+
+      REQUIRED_KEYS = [:user_id, :session_id, :build]
+
+    end
+
   end
 end
