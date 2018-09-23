@@ -18,9 +18,7 @@ module GameAnalytics
       metric = unit.is_a?(Array) ? unit.first : unit
       klass = metric.class
 
-      json_data = unit.to_json
-      category = klass.name.demodulize.downcase
-      #json_data['category'] = category
+      json_data = [unit].to_json
 
       header = {'Authorization' => Base64.strict_encode64(OpenSSL::HMAC.digest('sha256', options[:secret_key], json_data)) }
       header['X-Forwarded-For'] = metric.origin_ip if metric.origin_ip
