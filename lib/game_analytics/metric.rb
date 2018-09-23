@@ -30,7 +30,7 @@ module GameAnalytics
     def shared_required_default_keys
       {
         category: self.class.name.demodulize.downcase,
-        devise: 'unknown',
+        device: 'unknown',
         v: 2,
         sdk_version: 'rest api v2',
         os_version: 'linux 0.0',
