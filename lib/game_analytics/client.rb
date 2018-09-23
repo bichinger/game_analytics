@@ -33,11 +33,11 @@ module GameAnalytics
 
     def start_worker
       @worker_thread = Thread.new do
-        begin
+        #begin
           Worker.new(@queue).run
-        rescue => ex
-          logger.info "GameAnalytics worker thread exception: #{ex}"
-        end
+        #rescue => ex
+          #logger.info "GameAnalytics worker thread exception: #{ex}"
+        #end
       end
     end
 

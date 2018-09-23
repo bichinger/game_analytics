@@ -12,6 +12,8 @@ module GameAnalytics
     end
 
     def initialize(data={})
+      data = shared_required_default_keys.merge(data)
+
       @data = data
       needs = required_keys - data.keys
       raise "missing required fields #{needs}" unless needs.empty?
@@ -25,39 +27,47 @@ module GameAnalytics
       self.class.const_get("REQUIRED_KEYS")
     end
 
+    def shared_required_default_keys
+      {
+        category: self.class.name.demodulize.downcase,
+        device: 'unknown',
+        v: 2,
+        sdk_version: 'rest api v2',
+        os_version: 'linux 0.0',
+        manufacturer: 'unknown',
+        platform: 'linux',
+        client_ts: Time.zone.now.to_i
+      }
+    end
+
 
     class Design < Metric
 
-      REQUIRED_KEYS = [:user_id, :session_id, :build, :event_id]
+      REQUIRED_KEYS = [:user_id, :session_id, :session_num, :event_id]
 
     end
 
     class User < Metric
 
-      REQUIRED_KEYS = [:user_id, :session_id, :build, :event_id]
+      REQUIRED_KEYS = [:user_id, :session_id, :session_num, :event_id]
 
     end
 
     class Business < Metric
 
-      REQUIRED_KEYS = [:user_id, :session_id, :build, :event_id, :currency, :amount]
-
-    end
-
-    class Quality < Metric
-
-      REQUIRED_KEYS = [:user_id, :session_id, :build, :event_id]
-
-      def initialize(data={})
-        super
-        logger.warn('Deprecation Warning: the Quality metric is deprecated, please use the Error metric instead')
-      end
+      REQUIRED_KEYS = [:user_id, :session_id, :session_num, :event_id, :currency, :amount]
 
     end
 
     class Error < Metric
 
-      REQUIRED_KEYS = [:user_id, :session_id, :build]
+      REQUIRED_KEYS = [:user_id, :session_id, :session_num]
+
+    end
+
+    class Progression < Metric
+
+      REQUIRED_KEYS = [:user_id, :session_id, :session_num]
 
     end
 
