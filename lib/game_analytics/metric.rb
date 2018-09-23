@@ -35,7 +35,7 @@ module GameAnalytics
         sdk_version: 'rest api v2',
         os_version: 'linux 0.0',
         manufacturer: 'unknown',
-        platform: 'unknown',
+        platform: 'linux',
         client_ts: Time.zone.now.to_i
       }
     end
