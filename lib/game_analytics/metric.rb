@@ -43,42 +43,31 @@ module GameAnalytics
 
     class Design < Metric
 
-      REQUIRED_KEYS = [:user_id, :session_id, :build, :event_id]
+      REQUIRED_KEYS = [:user_id, :session_id, :session_num, :event_id]
 
     end
 
     class User < Metric
 
-      REQUIRED_KEYS = [:user_id, :session_id, :build, :event_id]
+      REQUIRED_KEYS = [:user_id, :session_id, :session_num, :event_id]
 
     end
 
     class Business < Metric
 
-      REQUIRED_KEYS = [:user_id, :session_id, :build, :event_id, :currency, :amount]
-
-    end
-
-    class Quality < Metric
-
-      REQUIRED_KEYS = [:user_id, :session_id, :build, :event_id]
-
-      def initialize(data={})
-        super
-        logger.warn('Deprecation Warning: the Quality metric is deprecated, please use the Error metric instead')
-      end
+      REQUIRED_KEYS = [:user_id, :session_id, :session_num, :event_id, :currency, :amount]
 
     end
 
     class Error < Metric
 
-      REQUIRED_KEYS = [:user_id, :session_id, :build]
+      REQUIRED_KEYS = [:user_id, :session_id, :session_num]
 
     end
 
     class Progression < Metric
 
-      REQUIRED_KEYS = [:user_id, :session_id, :build]
+      REQUIRED_KEYS = [:user_id, :session_id, :session_num]
 
     end
 
