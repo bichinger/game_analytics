@@ -12,6 +12,8 @@ module GameAnalytics
     end
 
     def initialize(data={})
+      data = data.merge({ category: self.class.name.demodulize.downcase })
+
       @data = data
       needs = required_keys - data.keys
       raise "missing required fields #{needs}" unless needs.empty?
